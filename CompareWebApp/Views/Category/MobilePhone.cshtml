@@ -1,0 +1,87 @@
+﻿@model CompareWebApp.Models.ProductsCollection
+
+@{
+    ViewBag.Title = "MobilePhone";
+    Layout = "~/Views/Shared/Master.cshtml";
+}
+<h3><span id="categoryName">@Model.CategoryName</span></h3>
+
+<div class="row">
+    <div class="col-md-10">
+        <table class="table">
+            <tr>
+                <th>
+                    Product
+                </th>
+                <th>
+                    Price
+                </th>
+            </tr>
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.productName, "Vendors", "Home", new { id = item.productName }, null)
+                    </td>
+                    <td>
+                        price fra: @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                </tr>
+            }
+
+            @{int _totalNoOfPages   = Convert.ToInt32(Model.Pager.TotalNoOfPages); }
+            @{int _currentPageIndex = Convert.ToInt32(Model.Pager.CurrentPageIndex);}
+            
+
+            @if (_totalNoOfPages > 1)
+            {
+                <tr>
+                    <td colspan="4">
+                        <nav>
+                            <ul class="pagination">
+                                @if (_currentPageIndex == 1)
+                                {
+                                    <li class="disabled"><span aria-hidden="true">&laquo;</span></li>
+                                }
+                                else
+                                {
+                                    <li><a href="#" data-pageindex="@(_currentPageIndex - 1)" class="categoryPager" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                                }
+                                @for (var i = 0; i < _totalNoOfPages; i++)
+                                {
+                                    if (i == _currentPageIndex)
+                                    {
+                                        <li class="active"><a href="#" data-pageindex="@i" class="categoryPager">@(i + 1)</a></li>
+                                    }
+
+                                    else
+                                    {
+                                        <li><a href="#" data-pageindex="@i" class="categoryPager">@(i + 1)</a></li>
+                                    }
+                                }
+
+                                @if (_currentPageIndex == _totalNoOfPages)
+                                {
+                                    <li class="disabled"><span aria-hidden="true">&raquo;</span></li>
+                                }
+                                else
+                                {
+                                    <li><a href="#" data-pageindex="@(_currentPageIndex + 1)" class="categoryPager" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                                }
+
+                            </ul>
+
+                            </nav>
+                        </td>
+                    </tr>
+            }
+        </table>
+
+
+
+    </div>
+</div>
+
+
+       
+    

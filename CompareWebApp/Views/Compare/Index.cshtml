@@ -1,0 +1,82 @@
+﻿@model IEnumerable<CompareWebApp.Models.Categories>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Master.cshtml";
+}
+
+<h3>Three equal columns</h3>
+
+<div class="row">
+    <div class="col-md-3">
+        <table class="table">
+            @{int i = 0;}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParentCategory.categoryName)
+                        <br />
+                        @{i = 0;}
+
+                        @foreach (var itemcats in item.ProductCategories)
+                        {
+                            //@Html.DisplayFor(modelItem => itemcats.categoryName)
+                            @Html.ActionLink(itemcats.categoryName, "Index", "Category", new { categoryName = itemcats.categoryName, currentPageIndex = 1 }, null);
+                            <span>&nbsp;</span>
+                            i++;
+                            if (i % 3 == 0)
+                            {
+                                <br />
+                            }
+                        }
+
+                    </td>
+
+                </tr>
+                            }
+
+        </table>
+    </div>
+    <div class="col-md-7">
+        <img src="~/images/1.jpg" class="img-responsive" />
+
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h4>Top 10 Products</h4> </div>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a>Cras justo odio</a></li>
+                        <li class="list-group-item"><a>Dapibus ac facilisis in</a></li>
+                        <li class="list-group-item"><a>Morbi leo risus</a></li>
+                        <li class="list-group-item"><a>Porta ac consectetur ac</a></li>
+                        <li class="list-group-item"><a>Vestibulum at eros</a></li>
+                    </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>Subheading</h4>
+            <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+            <h4>Subheading</h4>
+            <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+            <h4>Subheading</h4>
+            <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+
+        </div>
+
+    </div>
+    <div class="col-md-2">
+        <h4>Subheading</h4>
+        <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+        <h4>Subheading</h4>
+        <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+        <h4>Subheading</h4>
+        <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+
+    </div>
+
+
+</div>
+

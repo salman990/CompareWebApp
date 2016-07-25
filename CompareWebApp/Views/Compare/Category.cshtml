@@ -1,0 +1,62 @@
+﻿@model CompareWebApp.Models.ProductsCollection
+
+    @{
+        Layout = "~/Views/Shared/Master.cshtml";
+    }
+
+<div class="row">
+    <div class="col-md-10">
+        <table class="table">
+            <tr>
+                <th>
+                    Product
+                </th>
+                <th>
+                    Price
+                </th>
+            </tr>
+
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.productName)
+                        @Html.ActionLink(item.productName, "Vendors", "Home", new { id = item.productID }, null);
+
+                    </td>
+                    <td>
+                        price fra: @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                </tr>
+
+            }
+
+            <tr>
+                <td colspan="4">
+                    @for (var i = 0; i < Model.PageCount; i++)
+                    {
+                        if (i == (Model.CurrentPageIndex -1) )
+                        {
+                            <span>@(i + 1)</span>
+                        }
+                        else
+                        {
+
+                            <a href="#" data-pageindex="@(i + 1)" class="categoryPager">@(i + 1)</a>
+                        }
+
+                    }
+            </td>
+            </tr>
+
+        </table>
+
+        @using (Html.BeginForm("GetProductsByCategory", "Compare", FormMethod.Post, new { id = "categoryForm" }))
+        {
+            <input type="hidden" id="categoryCurrentPageIndex" name="categoryCurrentPageIndex" />
+        }
+
+    </div>
+</div>
+
+
