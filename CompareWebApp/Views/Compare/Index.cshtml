@@ -21,7 +21,7 @@
                         @foreach (var itemcats in item.ProductCategories)
                         {
                             //@Html.DisplayFor(modelItem => itemcats.categoryName)
-                            @Html.ActionLink(itemcats.categoryName, "Index", "Category", new { categoryName = itemcats.categoryName, currentPageIndex = 1 }, null);
+                            @Html.ActionLink(itemcats.categoryName, "Index", "Category", new { categoryName = itemcats.categoryName, currentPageIndex = 0 }, null);
                             <span>&nbsp;</span>
                             i++;
                             if (i % 3 == 0)

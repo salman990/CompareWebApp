@@ -31,7 +31,6 @@
 
             @{int _totalNoOfPages   = Convert.ToInt32(Model.Pager.TotalNoOfPages); }
             @{int _currentPageIndex = Convert.ToInt32(Model.Pager.CurrentPageIndex);}
-            
 
             @if (_totalNoOfPages > 1)
             {
@@ -39,34 +38,43 @@
                     <td colspan="4">
                         <nav>
                             <ul class="pagination">
-                                @if (_currentPageIndex == 1)
+                                @if (_currentPageIndex == 0)
                                 {
                                     <li class="disabled"><span aria-hidden="true">&laquo;</span></li>
                                 }
                                 else
                                 {
-                                    <li><a href="#" data-pageindex="@(_currentPageIndex - 1)" class="categoryPager" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                                    <li>
+                                        <a href="@Url.Action("Index", "Category", new { categoryName = @Model.CategoryName, currentPageIndex = @_currentPageIndex - 1 })"><span aria-hidden='true'>&laquo;</span></a>
+                                    </li>
                                 }
                                 @for (var i = 0; i < _totalNoOfPages; i++)
                                 {
                                     if (i == _currentPageIndex)
                                     {
-                                        <li class="active"><a href="#" data-pageindex="@i" class="categoryPager">@(i + 1)</a></li>
+                                        <li class="active">
+                                            @Html.ActionLink((@i + 1).ToString(), "Index", "Category", new { categoryName = @Model.CategoryName, currentPageIndex = @i }, null)
+                                        </li>
                                     }
 
                                     else
                                     {
-                                        <li><a href="#" data-pageindex="@i" class="categoryPager">@(i + 1)</a></li>
+                                        <li>
+                                            @Html.ActionLink((@i + 1).ToString(), "Index", "Category", new { categoryName = @Model.CategoryName, currentPageIndex = @i }, null)
+                                        </li>
                                     }
                                 }
 
-                                @if (_currentPageIndex == _totalNoOfPages)
+                                @if (_currentPageIndex == (_totalNoOfPages - 1))
                                 {
                                     <li class="disabled"><span aria-hidden="true">&raquo;</span></li>
                                 }
                                 else
                                 {
-                                    <li><a href="#" data-pageindex="@(_currentPageIndex + 1)" class="categoryPager" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                                    <li>
+                                        <a href="@Url.Action("Index", "Category", new { categoryName = @Model.CategoryName, currentPageIndex = @_currentPageIndex + 1 })"><span aria-hidden='true'>&raquo;</span></a>
+                                    </li>
+
                                 }
 
                             </ul>

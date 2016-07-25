@@ -48,13 +48,13 @@
         @RenderSection("scripts", required: false)
     <script type="text/javascript">
     $(document).ready(function () {
-
-        $(".categoryPager").click(function (evt) {
-            var currentPageIndex = $(this).data("pageindex");
-            alert(currentPageNo);
-            var categoryName = $("#categoryName").text();
-            location.href = '@Url.Action("Index", "Category")?categoryName=' + categoryName + '&currentPageIndex=' + currentPageIndex;
-    });
+        
+        $(".categoryPager1").click(function (evt) {
+        //    var currentPageIndex = $(this).data("pageindex");
+            //alert($("#categoryName").text());
+           // var categoryName = $("#categoryName").text();
+          //  location.href = '@Url.Action("Index", "Category")?categoryName=' + categoryName + '&currentPageIndex=' + currentPageIndex;
+        });
         
     });
 
